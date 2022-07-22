@@ -1,12 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>9</LangVersion>
         <RootNamespace>PlusCollections</RootNamespace>
-        <Authors>Hazel Koehler</Authors>
+        <Authors>acomputerdog</Authors>
         <AssemblyName>PlusCollections</AssemblyName>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>PlusCollections</PackageId>
+        <Title>+Collections</Title>
+        <Description>Extra data structures for .NET</Description>
+        <Copyright>Copyright (c) 2022 Hazel Koehler</Copyright>
+        <PackageProjectUrl>https://github.com/warriordog/PlusCollections</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/warriordog/PlusCollections.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>collections,data</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageVersion>1.0.1</PackageVersion>
+        <PackageReleaseNotes>Fix README</PackageReleaseNotes>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\LICENSE" Pack="true" PackagePath="LICENSE" />
+        <None Include="..\README.md" Pack="true" PackagePath="README.md" />
+    </ItemGroup>
 </Project>
