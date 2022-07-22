@@ -8,8 +8,6 @@ public abstract class Table2Tests<TTable, TRow> : BaseTableTests<TTable, TRow>
     where TRow : Table2Row<int, string, TRow>
 {
 
-    private void AddToTable(TTable table, int key1, string key2) => AddToTable(table, key1, key2, new Guid());
-    
     [Fact]
     public void Key1MapShouldIncludeAllRows()
     {
@@ -353,7 +351,7 @@ public class Table2Tests : Table2Tests<Table<int, string>, TableRow<int, string>
         return table;
     }
 
-    public override void AddToTable(Table<int, string> table, int key1, string key2, Guid key3)
+    public override void AddToTable(Table<int, string> table, int key1, string key2, Guid key3, int key4, float key5, object key6)
     {
         table.Add(key1, key2);
     }

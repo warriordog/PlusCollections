@@ -71,6 +71,5 @@ namespace PlusCollections.Table
             Key2 = key2;
             Key3 = key3;
         }
-
     }
 }

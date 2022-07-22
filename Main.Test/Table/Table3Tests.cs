@@ -174,7 +174,7 @@ public class Table3Tests : Table3Tests<Table<int, string, Guid>, TableRow<int, s
         return table;
     }
 
-    public override void AddToTable(Table<int, string, Guid> table, int key1, string key2, Guid key3)
+    public override void AddToTable(Table<int, string, Guid> table, int key1, string key2, Guid key3, int key4, float key5, object key6)
     {
         table.Add(key1, key2, key3);
     }
