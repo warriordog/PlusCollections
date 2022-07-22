@@ -48,4 +48,86 @@ public abstract class BaseTableTests<TTable, TRow>
         var contents = table.ToList();
         contents.Should().BeEmpty();
     }
+
+    [Fact]
+    public void IsReadOnlyShouldBeFalse()
+    {
+        var table = MakeHappyTable();
+        table.IsReadOnly.Should().BeFalse();
+    }
+
+    [Fact]
+    public void ContainsShouldReturnTrueForAllRows()
+    {
+        var table = MakeHappyTable();
+
+        foreach (var row in table)
+        {
+            table.Contains(row).Should().BeTrue();
+        }
+    }
+
+    [Fact]
+    public void ContainsShouldReturnFalseAfterRowIsRemoved()
+    {
+        var table = MakeHappyTable();
+        var removedRows = table.ToList();
+        table.Clear();
+
+        foreach (var row in removedRows)
+        {
+            table.Contains(row).Should().BeFalse();
+        }
+    }
+
+    [Fact]
+    public void RemoveShouldReturnTrueIfRowIsInTable()
+    {
+        var table = MakeHappyTable();
+        var rows = table.ToList();
+
+        foreach (var row in rows)
+        {
+            var result = table.Remove(row);
+            result.Should().BeTrue();
+        }
+    }
+
+    [Fact]
+    public void RemoveShouldReturnFalseIfRowIsNotInTable()
+    {
+        var table = MakeHappyTable();
+        var rows = table.ToList();
+        rows.Clear();
+        
+        foreach (var row in rows)
+        {
+            var result = table.Remove(row);
+            result.Should().BeFalse();
+        }
+    }
+
+    [Fact]
+    public void CountShouldReturnTheSizeOfTheTable()
+    {
+        var expectedCount = TestData.Count;
+        var table = MakeHappyTable();
+        var count = table.Count;
+        count.Should().Be(expectedCount);
+    }
+
+    [Fact]
+    public void AddShouldSkipIfRowIsAlreadyAdded()
+    {
+        var table = MakeHappyTable();
+        var initialRows = table.ToList();
+
+        foreach (var row in initialRows)
+        {
+            table.Add(row);
+        }
+
+        var actualRows = table.ToList();
+        actualRows.Should().BeEquivalentTo(initialRows);
+    }
 }

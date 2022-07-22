@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace PlusCollections.Table
 {
-    public abstract class BaseTable<TRow> : IEnumerable<TRow>
+    public abstract class BaseTable<TRow> : ICollection<TRow>
         where TRow : TableRow<TRow>
     {
         private readonly LinkedList<TRow> _rowIndex = new();
 
-        protected virtual void Add(TRow row)
+        public virtual void Add(TRow row)
         {
             if (row.IndexNode == null)
             {
@@ -17,19 +17,22 @@ namespace PlusCollections.Table
             }
         }
 
-        protected virtual void Remove(TRow row)
+        public virtual bool Remove(TRow row)
         {
-            if (row.IndexNode != null)
-            {
-                _rowIndex.Remove(row.IndexNode);
-                row.IndexNode = null;
-            }
+            if (row.IndexNode == null) return false;
+            
+            _rowIndex.Remove(row.IndexNode);
+            row.IndexNode = null;
+            return true;
         }
 
-        public virtual void Clear()
-        {
-            _rowIndex.Clear();
-        }
+        public bool Contains(TRow item) => item.IndexNode?.List == _rowIndex;
+        public virtual void Clear() => _rowIndex.Clear();
+
+        
+        public void CopyTo(TRow[] array, int arrayIndex) => _rowIndex.CopyTo(array, arrayIndex);
+        public int Count => _rowIndex.Count;
+        public bool IsReadOnly => false;
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public IEnumerator<TRow> GetEnumerator() => _rowIndex.GetEnumerator();

@@ -10,7 +10,7 @@ namespace PlusCollections.Table
         public IReadOnlyDictionary<T3, TRow> Key3Map => _key3Map;
         public IEnumerable<T3> Key3Values => this.Select(row => row.Key3);
         
-        protected override void Add(TRow row)
+        public override void Add(TRow row)
         {
             // Remove any existing mappings to support change
             RemoveByKey3(row.Key3);
@@ -18,10 +18,10 @@ namespace PlusCollections.Table
             base.Add(row);
         }
 
-        protected override void Remove(TRow row)
+        public override bool Remove(TRow row)
         {
             _key3Map.Remove(row.Key3);
-            base.Remove(row);
+            return base.Remove(row);
         }
 
         public TRow GetByKey3(T3 key) => _key3Map[key];

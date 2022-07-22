@@ -14,7 +14,7 @@ namespace PlusCollections.Table
         public IReadOnlyDictionary<T2, TRow> Key2Map => _key2Map;
         public IEnumerable<T2> Key2Values => this.Select(row => row.Key2);
         
-        protected override void Add(TRow row)
+        public override void Add(TRow row)
         {
             // Remove any existing mappings to support change
             RemoveByKey1(row.Key1);
@@ -26,11 +26,11 @@ namespace PlusCollections.Table
             base.Add(row);
         }
 
-        protected override void Remove(TRow row)
+        public override bool Remove(TRow row)
         {
             _key1Map.Remove(row.Key1);
             _key2Map.Remove(row.Key2);
-            base.Remove(row);
+            return base.Remove(row);
         }
 
         public TRow GetByKey1(T1 key) => _key1Map[key];
@@ -41,7 +41,7 @@ namespace PlusCollections.Table
 
         public bool ContainsKey1(T1 key) => _key1Map.ContainsKey(key);
         public bool ContainsKey2(T2 key) => _key2Map.ContainsKey(key);
-        
+
         public void RemoveByKey1(T1 key)
         {
             if (_key1Map.TryGetValue(key, out var row))
