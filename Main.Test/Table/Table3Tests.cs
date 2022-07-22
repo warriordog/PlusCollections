@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using PlusCollections.Table;
+﻿using PlusCollections.Table;
 
 namespace PlusCollections.Test.Table;
 
