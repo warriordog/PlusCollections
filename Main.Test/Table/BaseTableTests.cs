@@ -98,7 +98,7 @@ public abstract class BaseTableTests<TTable, TRow>
     {
         var table = MakeHappyTable();
         var rows = table.ToList();
-        rows.Clear();
+        table.Clear();
         
         foreach (var row in rows)
         {

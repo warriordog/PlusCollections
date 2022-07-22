@@ -19,7 +19,7 @@ namespace PlusCollections.Table
 
         public virtual bool Remove(TRow row)
         {
-            if (row.IndexNode == null) return false;
+            if (row.IndexNode?.List == null) return false;
             
             _rowIndex.Remove(row.IndexNode);
             row.IndexNode = null;
