@@ -1,5 +1,5 @@
-# PlusCollections
-PlusCollections is a set of extra data structures for .NET.
+# +Collections
++Collections is a set of extra data structures and functions to support edge cases that are not well covered by the standard collections.
 
 ### <ins>Table - Order-preserving bidirectional multi-key map</ins>
 Table is an implementation of a multiple-key bidirectional map.
@@ -20,7 +20,6 @@ In cases where only one key is changed, complexity returns to `O(K)`.
 * Iteration complexity - `O(n)` (equal to walking a linked list)
 
 #### Implementations
-
 | Namespace | Class | Description |
 | --- | --- | --- |
 | `PlusCollections.Table` | `Table<TKey1, TKey2>` | Two-key implementation |
@@ -28,3 +27,21 @@ In cases where only one key is changed, complexity returns to `O(K)`.
 | `PlusCollections.Table` | `Table<TKey1, TKey2, TKey3, TKey4>` | Four-key implementation |
 | `PlusCollections.Table` | `Table<TKey1, TKey2, TKey3, TKey4, TKey5>` | Five-key implementation |
 | `PlusCollections.Table` | `Table<TKey1, TKey2, TKey3, TKey4, TKey5, TKey6>` | Six-key implementation |
+
+### <ins>MaxOrDefault - `Max()` with support for empty collections</ins>
+EnumerableExtensions implements a new version of `IEnumerable<T>.Max` that does not throw if the collection is empty.
+Instead, it returns the element type's default value or a user-provided placeholder.
+
+#### Overloads:
+* `EnumerableExtensions.MaxOrDefault<TIn, TOut>(enumerable, def, callback)` - If the stream is empty, then returns `def`. Otherwise, passes `callback` to the standard implementation of `IEnumerable.Max` and returns the result.
+* `EnumerableExtensions.MaxOrDefault<T>(enumerable, def)` - If the stream is empty, then returns `def`. Otherwise calls the default implementation of `IEnumerable.Max`.
+* `EnumerableExtensions.MaxOrDefault<TIn, TOut>(enumerable, callback)` - If the steam is empty, then returns `default(TOut)`. Otherwise passes `callback` to `IEnumerable.Max`.
+* `EnumerableExtensions.MaxOrDefault<T>(enumerable)` - If the stream is empty, the returns `default(T)`. Otherwise calls the default implementation of `IEnumerable.Max`.
+
+### <ins>ListExtensions - Additional variations of `Contains()`
+ListExtensions implements new variations of `IList<T>.Contains` that assert not only inclusion, but also position within the list.
+Four methods are available:
+* `ListExtensions.ContainsFirst(list, target)` - returns true only if `target` is the first item in `list`.
+* `ListExtensions.ContainsLast(list, target)` - returns true only if `target` is the last item in `list`.
+* `ListExtensions.ContainsNotFirst(list, target)` - return true only if `target` is in `list` but is not the first item.
+* `ListExtensions.ContainsNotLast(list, target)` - returns true only if `target` is in `list` but is not the last item.
